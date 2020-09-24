@@ -1,11 +1,15 @@
 # README
+Ruby on Rails backend for not-tumblr
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## TODO
+- [x] decrypt jwt token and retrieve the user_id
+- [x] Seeds and structure for SQLite dev server
+- [ ] Production PostgreSQL server configs (clean up structure and seeds)
+- [ ] CORs for production
+- [ ] Posts resource
 
-Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.7.0
 
 * System dependencies
 
