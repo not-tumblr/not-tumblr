@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :accounts do
-    resources :posts
-  end
+  resources :accounts
+  resources :posts
+  # resources :accounts do
+  #   resources :posts
+  # end
 end
