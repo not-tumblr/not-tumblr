@@ -17,9 +17,10 @@ Ruby on Rails backend for not-tumblr
 ## TODO
 - [x] decrypt jwt token and retrieve the user_id
 - [x] Seeds and structure for SQLite dev server
-- [ ] Production PostgreSQL server configs (clean up structure and seeds)
-- [ ] CORs for production
+- [x] CORs for production
 - [x] Posts resource
+- [ ] Production PostgreSQL server configs (clean up structure and seeds)
+- [ ] Environment variables (JWT token)
 - [ ] Generate UUID for each post to use as ID
 
 
