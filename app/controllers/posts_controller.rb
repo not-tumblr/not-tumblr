@@ -1,11 +1,10 @@
 class PostsController < ApplicationController
-  before_action :authorize_request, only: [:show, :create, :update, :destroy]
-  before_action :set_post, only: [:index, :show, :update, :destroy]
+  before_action :authorize_request, only: [:index, :create, :update, :destroy]
+  before_action :set_post, only: [:show, :update, :destroy]
 
   # GET /posts
   def index
     @posts = Post.all
-
     render json: @posts
   end
 
@@ -47,6 +46,11 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:owner, :post_id, :content, :notes)
+      owner = @current_user.user_id
+      post_id = 100
+      content = params.require(:post).permit(:content)
+      notes = 0
+
+      [owner, post_id, content, notes]
     end
 end
