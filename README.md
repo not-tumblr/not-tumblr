@@ -19,8 +19,9 @@ Ruby on Rails backend for not-tumblr
 - [x] Seeds and structure for SQLite dev server
 - [x] CORs for production
 - [x] Posts resource
-- [ ] Production PostgreSQL server configs (clean up structure and seeds)
-- [ ] Environment variables (JWT token)
+- [x] Production PostgreSQL server configs (clean up structure and seeds)
+- [x] Environment variables (JWT token)
+- [ ] Make a welcome page
 - [ ] Generate UUID for each post to use as ID
 
 
