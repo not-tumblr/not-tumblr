@@ -12,8 +12,25 @@
 
 ActiveRecord::Schema.define(version: 2020_09_24_193058) do
 
-# Could not dump table "accounts" because of following StandardError
-#   Unknown type 'SERIAL' for column 'id'
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "accounts", id: :serial, force: :cascade do |t|
+    t.string "compound_id", limit: 255, null: false
+    t.integer "user_id", null: false
+    t.string "provider_type", limit: 255, null: false
+    t.string "provider_id", limit: 255, null: false
+    t.string "provider_account_id", limit: 255, null: false
+    t.text "refresh_token"
+    t.text "access_token"
+    t.datetime "access_token_expires"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["compound_id"], name: "compound_id", unique: true
+    t.index ["provider_account_id"], name: "provider_account_id"
+    t.index ["provider_id"], name: "provider_id"
+    t.index ["user_id"], name: "user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer "owner"
@@ -24,13 +41,34 @@ ActiveRecord::Schema.define(version: 2020_09_24_193058) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-# Could not dump table "sessions" because of following StandardError
-#   Unknown type 'SERIAL' for column 'id'
+  create_table "sessions", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "expires", null: false
+    t.string "session_token", limit: 255, null: false
+    t.string "access_token", limit: 255, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["access_token"], name: "access_token", unique: true
+    t.index ["session_token"], name: "session_token", unique: true
+  end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'SERIAL' for column 'id'
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "email", limit: 255
+    t.datetime "email_verified"
+    t.string "image", limit: 255
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["email"], name: "email", unique: true
+  end
 
-# Could not dump table "verification_requests" because of following StandardError
-#   Unknown type 'SERIAL' for column 'id'
+  create_table "verification_requests", id: :serial, force: :cascade do |t|
+    t.string "identifier", limit: 255, null: false
+    t.string "token", limit: 255, null: false
+    t.datetime "expires", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["token"], name: "token", unique: true
+  end
 
 end
